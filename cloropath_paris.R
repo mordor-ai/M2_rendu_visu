@@ -77,8 +77,6 @@ ggplot() +
 
 # plot final
 
-
-
 p <- ggplot() +
   geom_polygon(data = spdf_fortified_filtered, aes(fill = Nombres, x = long, y = lat, group = group) , size=0, alpha=0.9) +
   theme_void() +

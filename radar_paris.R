@@ -24,10 +24,9 @@ names(dataParisAgg)<-c("ANNEE","TYPE_ACTE",  "ARRONDISSEMENT", "NOMBRES")
 head(dataParisAgg)
 
 
-dataParisAggFiltered <- filter(dataParisAgg, dataParisAgg$ANNEE==2005)
-
-dataParisAggFiltered$NOMBRES <-as.numeric(dataParisAggFiltered$NOMBRES)
-
+dataParisAggFiltered <- filter(dataParisAgg, dataParisAgg$ANNEE==2014
+                               #, dataParisAgg$ARRONDISSEMENT=="15ème arrdt"
+                               )
 dataParisAggFiltered <- subset (dataParisAggFiltered, select = -ANNEE)
 dataParisAggFiltered
 
@@ -36,8 +35,8 @@ dataParisAggFiltered
 ggplot(data=dataParisAggFiltered,  aes(x=TYPE_ACTE, y=NOMBRES, group= ARRONDISSEMENT, colour=ARRONDISSEMENT, fill=ARRONDISSEMENT)) + 
   geom_point(size=2) + 
   geom_polygon(size = 1, alpha= 0.2) + 
-#  ylim(-2.0, 2.0) + 
-  ggtitle("Année 2005")  + 
+  ylim(0, 10000) + 
+ggtitle("Année 2014" )  + 
  # scale_x_discrete() +
   theme_light()+
   coord_polar()
