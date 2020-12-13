@@ -3,8 +3,10 @@ install.packages("geojsonio")
 install.packages("broom")
 install.packages("mapproj")
 install.packages("viridis")
+install.packages("ggradar")
 
-
+library(scales)
+library(tidyr)
 library(maps)
 library(geojsonio)
 library(broom)
@@ -29,6 +31,7 @@ dataParis <- read.csv2("./datas/statistiques_de_creation_d_actes_d_etat_civil_pa
 head(dataParis)
 
 
+
 ## get the id or arrdt
 dataParis$id <-as.integer(str_extract(dataParis$Arrondissement, "[0-9]+"))
 str(dataParis$id )
@@ -40,6 +43,17 @@ spdf_fortified = spdf_fortified %>%
   left_join(. , dataParis, by=c("id"="id"))
 head(spdf_fortified)
 
+dataParisAgg <- aggregate(dataParis$Nombres, by=list(dataParis$Année,dataParis$Type.d.acte), FUN=sum)
+head(dataParisAgg)
+dataParisAgg %>%
+  ggplot( aes(x=Group.1)) +
+  geom_histogram(bins=20, fill='skyblue', color='#69b3a2') 
+dataParisAgg %>%
+ggplot(aes(x=Group.1, y=x, group=Group.2, fill=Group.2, color=Group.2)) + 
+  geom_line()
+
+
+
 # Plot simple
 
 ggplot() +
@@ -48,7 +62,9 @@ ggplot() +
   coord_map()
 
 # filtre sur les maraiages en 2014
-spdf_fortified_filtered <- filter(spdf_fortified, spdf_fortified$Année==2014, spdf_fortified$Type.d.acte == "Mariage")
+spdf_fortified_filtered <- filter(spdf_fortified, spdf_fortified$Année==2004, spdf_fortified$Type.d.acte == "Mariage")
+head(spdf_fortified_filtered)
+
 
 
 
