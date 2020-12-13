@@ -1,8 +1,6 @@
 # from https://gis.stackexchange.com/questions/295227/how-to-make-customized-radar-chart-in-r
 #radar 
 install.packages("reshape")
-devtools::install_github("ricardo-bion/ggradar", 
-                         dependencies = TRUE)
 
 install.packages("scales")
 install.packages("fmsb")
@@ -32,6 +30,8 @@ dataParisAggFiltered$NOMBRES <-as.numeric(dataParisAggFiltered$NOMBRES)
 
 dataParisAggFiltered <- subset (dataParisAggFiltered, select = -ANNEE)
 dataParisAggFiltered
+
+
 
 ggplot(data=dataParisAggFiltered,  aes(x=TYPE_ACTE, y=NOMBRES, group= ARRONDISSEMENT, colour=ARRONDISSEMENT, fill=ARRONDISSEMENT)) + 
   geom_point(size=2) + 
