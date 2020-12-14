@@ -125,7 +125,7 @@ dataParisAggFiltered <- filter(dataParisAgg, dataParisAgg$ANNEE==2014)
 dataParisAggFiltered <- subset (dataParisAggFiltered, select = -ANNEE)
 ```
 On affiche le radar : 
-```{r 5 ,message = FALSE  }
+```{r 5 ,message = FALSE ,warning=FALSE }
 
 ggplot(data=dataParisAggFiltered,  aes(x=TYPE_ACTE, y=NOMBRES, group= ARRONDISSEMENT, colour=ARRONDISSEMENT, fill=ARRONDISSEMENT)) + 
   geom_point(size=2) + 
