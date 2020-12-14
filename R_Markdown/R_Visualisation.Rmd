@@ -20,7 +20,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r import1, message = FALSE , echo=FALSE }
 
-data <- read.csv("C:/data/arrondissement.csv", sep=";",encoding = "UTF-8")
+data <- read.csv("./data/arrondissement.csv", sep=";",encoding = "UTF-8")
 
 library(ggplot2)
 library(reshape)
@@ -120,7 +120,7 @@ Input description
 ```{r 4,message = FALSE ,  results='hide'}
 
 
-dataParis <- read.csv2("C:/data/ema/statistiques_de_creation_d_actes_d_etat_civil_par_arrondissement.csv",encoding = "UTF-8")
+dataParis <- read.csv2("./data/ema/statistiques_de_creation_d_actes_d_etat_civil_par_arrondissement.csv",encoding = "UTF-8")
 head(dataParis)
 
 dataParisAgg <- aggregate(dataParis$Nombres, by=list(dataParis$Année,dataParis$Type.d.acte,dataParis$Arrondissement), FUN=sum)
@@ -226,7 +226,7 @@ Input texte
 
 ```{r 6, message=FALSE}
 #charge les données des arrondissements pour l'affichage
-spd <- geojson_read("C:/data/arrondissements.geojson",  what = "sp")
+spd <- geojson_read("./data/arrondissements.geojson",  what = "sp")
 
 geo_paris <- tidy(spd)
 
@@ -234,7 +234,7 @@ geo_paris <- tidy(spd)
 geo_paris$id <- as.integer(geo_paris$id)
 
 # Charge les données des actes par arrondissement
-dataParis <- read.csv2("C:/data/ema/statistiques_de_creation_d_actes_d_etat_civil_par_arrondissement.csv",encoding = "UTF-8")
+dataParis <- read.csv2("./data/ema/statistiques_de_creation_d_actes_d_etat_civil_par_arrondissement.csv",encoding = "UTF-8")
   
 
 
@@ -277,7 +277,7 @@ p <- ggplot() +
   labs(
     title = "Ville de Paris - Actes civils",
     subtitle = "Nombres de Mariages en 2014",
-    caption = "Data: OPEN DATA PARIS | Creation: Emmanuel Pellegrin,  XXXX, XXXX"
+    caption = "Data: OPEN DATA PARIS "
   ) +
   theme(
     text = element_text(color = "#22211d"),
@@ -320,7 +320,7 @@ p <- ggplot() +
   labs(
     title = "Ville de Paris - Actes civils",
     subtitle = "Nombres de Décès  en 2014",
-    caption = "Data: OPEN DATA PARIS | Creation: Emmanuel Pellegrin,  XXXX, XXXX"
+    caption = "Data: OPEN DATA PARIS "
   ) +
   theme(
     text = element_text(color = "#22211d"),
@@ -361,7 +361,7 @@ p <- ggplot() +
   labs(
     title = "Ville de Paris - Actes civils",
     subtitle = "Nombres de Naissances en 2014",
-    caption = "Data: OPEN DATA PARIS | Creation: Emmanuel Pellegrin,  XXXX, XXXX"
+    caption = "Data: OPEN DATA PARIS "
   ) +
   theme(
     text = element_text(color = "#22211d"),
@@ -402,7 +402,7 @@ p <- ggplot() +
   labs(
     title = "Ville de Paris - Actes civils",
     subtitle = "Nombres de Reconnaissances en 2014",
-    caption = "Data: OPEN DATA PARIS | Creation: Emmanuel Pellegrin,  XXXX, XXXX"
+    caption = "Data: OPEN DATA PARIS "
   ) +
   theme(
     text = element_text(color = "#22211d"),
@@ -433,7 +433,7 @@ p
 Input txt
 ```{r}
 
-data = read.csv(file = "C:/data/ema/statistiques_de_creation_d_actes_d_etat_civil_par_arrondissement.csv",sep =";",encoding = "UTF-8")
+data = read.csv(file = "./data/ema/statistiques_de_creation_d_actes_d_etat_civil_par_arrondissement.csv",sep =";",encoding = "UTF-8")
 
 
 dataParisAgg <- aggregate(data$Nombres, by=list(data$Année,data$Type.d.acte), FUN=sum)
