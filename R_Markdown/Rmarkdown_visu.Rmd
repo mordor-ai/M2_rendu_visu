@@ -28,6 +28,16 @@ library(dplyr)
 library(fmsb)
 library(FactoMineR)
 library(factoextra)
+library(ggradar)
+library(scales)
+library(tibble)
+library(tidyr)
+library(maps)
+library(geojsonio)
+library(broom)
+library(mapproj)
+library(stringr)
+library(viridis)
 
 
 ```
@@ -57,15 +67,8 @@ res.pca <- PCA(data, ncp = 2,scale = T, graph = FALSE)
 
 eig.val <- get_eigenvalue(res.pca)
 
-res.hcpc <- HCPC(res.pca, graph = FALSE)
-fviz_pca_var(res.pca, col.var = "black")
-
-
-
-
 ```
 
- On colirie maintenant en fonction de la qualité de la représentation
 
 ```{r 2}
 fviz_pca_var(res.pca, col.var = "cos2",
@@ -98,18 +101,6 @@ fviz_cluster(res.hcpc,
 ### Radar
 
 ```{r import2, message = FALSE , echo=FALSE }
-
-
-
-library(ggplot2)
-library(ggradar)
-library(dplyr)
-library(scales)
-library(tibble)
-library(reshape)
-library(dplyr)
-library(fmsb)
-library(factoextra)
 
 
 ```
@@ -152,16 +143,6 @@ ggplot(data=dataParisAggFiltered,  aes(x=TYPE_ACTE, y=NOMBRES, group= ARRONDISSE
 ```{r import3, message = FALSE , echo=FALSE}
 
 
-library(scales)
-library(tidyr)
-library(maps)
-library(geojsonio)
-library(broom)
-library(ggplot2)
-library(mapproj)
-library(dplyr)
-library(stringr)
-library(viridis)
 ```
 
 #### Visualisation géographique
