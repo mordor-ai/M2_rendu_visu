@@ -57,15 +57,8 @@ res.pca <- PCA(data, ncp = 2,scale = T, graph = FALSE)
 
 eig.val <- get_eigenvalue(res.pca)
 
-res.hcpc <- HCPC(res.pca, graph = FALSE)
-fviz_pca_var(res.pca, col.var = "black")
-
-
-
-
 ```
 
- On colirie maintenant en fonction de la qualité de la représentation
 
 ```{r 2}
 fviz_pca_var(res.pca, col.var = "cos2",
