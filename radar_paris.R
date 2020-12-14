@@ -69,10 +69,10 @@ df_scaled
 # Rattacher le descriptif des variables aux données
 df_scaled2 <- as.data.frame(rbind(col_summary, df_scaled))
 
-opar <- par() 
+oldpar <- par(mar = rep(0.8,4),mfrow = c(5,4)) 
 # Définir les paramètres graphiques dans une grille 3x4, avec des marges appropriées:
-par(mar = rep(0.8,4))
-par(mfrow = c(5,4))
+#par()
+#par()
 # Produire un graphique radar pour chaque élève
 # on commence par 4 car les 3  premier graphiques sont les moyennes , max  et min
 for (i in 4:nrow(df_scaled2) ) {
@@ -85,8 +85,7 @@ for (i in 4:nrow(df_scaled2) ) {
 }
 
 
-
 # Restaurer les paramètres standard de par()
-par <- par(opar) 
+par(oldpar) 
 
 
