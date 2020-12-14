@@ -114,97 +114,39 @@ library(factoextra)
 
 ```
 
-Input description
+#### Visualisation RADAR
 
+
+Dans cette section on veut montrer les différences de profils entre les arrondissements pour l'année 2014
 
 ```{r 4,message = FALSE ,  results='hide'}
 
-
+#Lecture des données 
 dataParis <- read.csv2("./data/ema/statistiques_de_creation_d_actes_d_etat_civil_par_arrondissement.csv",encoding = "UTF-8")
-head(dataParis)
-
+# on compile les données par arrondissement , année, type d'actes
 dataParisAgg <- aggregate(dataParis$Nombres, by=list(dataParis$Année,dataParis$Type.d.acte,dataParis$Arrondissement), FUN=sum)
-head(dataParisAgg)
+#on renome les colonnes
 names(dataParisAgg)<-c("ANNEE","TYPE_ACTE",  "ARRONDISSEMENT", "NOMBRES")
-head(dataParisAgg)
-
-
-
-## tous les arrondissements
-
-dataParisAggFiltered <- filter(dataParisAgg, dataParisAgg$ANNEE==2014
-                               #, dataParisAgg$ARRONDISSEMENT=="15Ã¨me arrdt"
-                               )
+## Filtre sur l'année 2014 pour tous les arrondissements
+dataParisAggFiltered <- filter(dataParisAgg, dataParisAgg$ANNEE==2014)
+#suppression de la colonne Année 
 dataParisAggFiltered <- subset (dataParisAggFiltered, select = -ANNEE)
-dataParisAggFiltered
-
-
-
-
-
-
 ```
-input txt
+On affiche le radar : 
 ```{r 5 ,message = FALSE  }
-
 
 ggplot(data=dataParisAggFiltered,  aes(x=TYPE_ACTE, y=NOMBRES, group= ARRONDISSEMENT, colour=ARRONDISSEMENT, fill=ARRONDISSEMENT)) + 
   geom_point(size=2) + 
   geom_polygon(size = 1, alpha= 0.2) + 
   ylim(0, 10000) + 
-ggtitle("Année 2014" )  + 
- # scale_x_discrete() +
+  ggtitle("Actes civils pur l'année 2014" )  + 
   theme_light()+
   coord_polar()
-
-
-```
-
-input txt
-```{r83}
-
-# je fait une table pivot
-df_scaled <- reshape::cast(dataParisAggFiltered, ARRONDISSEMENT ~ TYPE_ACTE,value="NOMBRES")
-# je nomme les lignes avec le nom de l'rrondissement
-row.names(df_scaled) <-df_scaled[,1]
-
-
-# Descriptif des variables
-# Obtenir le minimum et le maximum de chaque colonne
-col_max <- apply(df_scaled, 2, max)
-col_min <- apply(df_scaled, 2, min)
-# Calculer le profil moyen 
-col_mean <- apply(df_scaled, 2, mean)
-# Rassembler le descriptif des colonnes
-col_summary <- t(data.frame(Max = col_max, Min = col_min, Average = col_mean))
-# je supprime la colonne arrondissment qui ne sert plus à  rien
-df_scaled <- subset( df_scaled, select = -ARRONDISSEMENT )
-df_scaled
-# Rattacher le descriptif des variables aux données
-df_scaled2 <- as.data.frame(rbind(col_summary, df_scaled))
-
-oldpar <- par(mar = rep(0.8,4),mfrow = c(5,4)) 
-# Définir les paramètres graphiques dans une grille 3x4, avec des marges appropriées:
-#par()
-#par()
-# Produire un graphique radar pour chaque élève
-# on commence par 4 car les 3  premier graphiques sont les moyennes , max  et min
-for (i in 4:nrow(df_scaled2) ) {
-  radarchart(
-    df_scaled2[c(1:3, i), ],
-    pfcol = c("#99999980",NA),
-    pcol= c(NA,2), plty = 1, plwd = 2,
-    title = row.names(df_scaled2)[i]
-  )
-}
-
-
 ```
 
 
 
-
-### Mapp
+### Map
 
 
 ```{r import3, message = FALSE , echo=FALSE}
@@ -222,7 +164,8 @@ library(stringr)
 library(viridis)
 ```
 
-Input texte
+#### Visualisation géographique
+Dans cette section , on veut visualiser par arondissement les nombres des actes pour l'année 2014 en utilisant la méthode cloropleth.
 
 ```{r 6, message=FALSE}
 #charge les données des arrondissements pour l'affichage
@@ -237,7 +180,6 @@ geo_paris$id <- as.integer(geo_paris$id)
 dataParis <- read.csv2("./data/ema/statistiques_de_creation_d_actes_d_etat_civil_par_arrondissement.csv",encoding = "UTF-8")
   
 
-
 ## crée une colonne id avec le N° de l'arrondissement
 dataParis$id <-as.integer(str_extract(dataParis$Arrondissement, "[0-9]+"))
 
@@ -248,19 +190,9 @@ geo_paris = geo_paris %>%
 # je regroupe par année et par acte
 dataParisAgg <- aggregate(dataParis$Nombres, by=list(dataParis$Année,dataParis$Type.d.acte), FUN=sum)
 
-head(dataParisAgg)
-
-
-
-
-
-
-
-
-
 ```
 
-input txt
+##### cloropleth Mariages
 ```{r 7}
 
 # filtre sur les mariages en 2014
@@ -296,8 +228,8 @@ p
 
 ```
 
-input txt
-```{r}
+##### cloropleth Décès
+```{r, message = FALSE , echo=FALSE, warning=FALSE}
 
 
 # filtre sur les mariages en 2014
@@ -338,8 +270,8 @@ p <- ggplot() +
 p
 ```
 
-input txt
-```{r}
+##### cloropleth Naissances
+```{r, message = FALSE , echo=FALSE, warning=FALSE}
 
 
 geo_paris_filtered <- filter(geo_paris, geo_paris$Année==2014, 
@@ -379,9 +311,8 @@ p <- ggplot() +
 p
 
 ```
-
-input txt
-```{r}
+##### cloropleth Reconnaissances
+```{r ,message = FALSE , echo=FALSE, warning=FALSE}
 
 geo_paris_filtered <- filter(geo_paris, geo_paris$Année==2014, 
                              geo_paris$Type.d.acte == "Reconnaissances")
