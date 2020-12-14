@@ -1,0 +1,1 @@
+Placer le fichier Data a votre racine (c:/data...)  vous avez utilisé differents jeu de données donc il y a chemins particulié.
