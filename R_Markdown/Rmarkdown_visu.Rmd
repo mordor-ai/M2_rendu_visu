@@ -82,6 +82,7 @@ fviz_pca_var(res.pca, col.var = "cos2",
 On peut constater en gris,  beaucoup plus de naissance : 12 eme 14eme et 15 arrondissement et en jaune des arrondissemnt moyen
 
 ```{r 3}
+res.hcpc <- HCPC(res.pca, graph = FALSE)
 
 fviz_cluster(res.hcpc,
              repel = TRUE,            # Evite le chevauchement des textes
