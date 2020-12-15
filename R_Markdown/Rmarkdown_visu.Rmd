@@ -1,6 +1,6 @@
 ---
 title: "Projet M2 Data Visualisation"
-author: "team"
+author: " ALBERJAOUI michail - BACO MAHADALI Youssouf  - BOUJEMAOUI ali - PELLEGRIN Emmanuel -  RANDRIANJANAHARY Sariaka - "
 date: "14/12/2020"
 output: html_document
 ---
