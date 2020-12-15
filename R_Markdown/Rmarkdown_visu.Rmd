@@ -360,7 +360,7 @@ dataParisAgg <- aggregate(data$Nombres, by=list(data$Année,data$Type.d.acte), F
 dataParisAgg %>%
   ggplot(aes(x=Group.1, y=x, group=Group.2, fill=Group.2, color=Group.2)) + 
   geom_line()+
-  labs(title = "Évolutions du nombre d'actes civils dans la région parisienne : ", 
+  labs(title = "Évolutions du nombre d'actes civils dans la région parisienne  ", 
        x = "Année", 
        y = "Nombres")
 
