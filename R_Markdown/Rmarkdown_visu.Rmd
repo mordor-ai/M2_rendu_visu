@@ -95,7 +95,7 @@ fviz_cluster(res.hcpc,
              show.clust.cent = TRUE,  # Montre le centre des clusters
              palette = "jco",         # Palette de couleurs, voir ?ggpubr::ggpar
              ggtheme = theme_minimal(),
-             main = "Affichage des individus"
+             main = "Affichage des individus par groupe (qui partagent les même similarité)"
 )
 
 
