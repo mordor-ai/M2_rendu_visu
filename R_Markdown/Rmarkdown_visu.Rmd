@@ -2,6 +2,7 @@
 title: "Projet M2 Data Visualisation"
 author: " ALBERJAOUI michail - BACO MAHADALI Youssouf  - BOUJEMAOUI ali - PELLEGRIN Emmanuel -  RANDRIANJANAHARY Sariaka - "
 date: "14/12/2020"
+repository: https://github.com/mordor-ai/M2_rendu_visu
 output: html_document
 ---
 
@@ -13,6 +14,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Visualisation par rapport aux statistiques  de creation d'actes d'etat civil par arrondissement {.tabset}
 
+repository: https://github.com/mordor-ai/M2_rendu_visu
+
 ###  ACP
 
 
@@ -20,7 +23,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r import1, message = FALSE , echo=FALSE }
 
-df <- read.csv("/Users/ybmahadali/Desktop/MASTER2_bis/Visu/projet/M2_rendu_visu-main/R_Markdown/data/arrondissement.csv", sep=";",encoding = "UTF-8")
+df <- read.csv("./data/arrondissement.csv", sep=";",encoding = "UTF-8")
 
 library(ggplot2)
 library(reshape)
@@ -43,7 +46,9 @@ library(viridis)
 ```
 
 
-Input description
+#### Visualisation des clusters
+Dans cette section on a voulu identifier les arrondissments qui sont similiares par rapports aux actes civils
+
 
 
 ```{r 1}
@@ -342,9 +347,10 @@ p
 ### Graph
 
 
+#### Visualisation de l'évolution
 
+Dans cette section on voul montrer l'évolution des actes civils sur Paris
 
-Input txt
 ```{r}
 
 data <- df
